@@ -18,6 +18,8 @@ import RollDiceBlock from "../src/components/blocks/RollDiceBlock"
 import PomodoroTimerBlock from "../src/components/blocks/PomodoroTimerBlock"
 import FortuneCookieBlock from "../src/components/blocks/FortuneCookieBlock"
 import ToiletPaperBlock from "../src/components/blocks/ToiletPaperBlock"
+import YouTubeVideoBlock from "../src/components/blocks/YouTubeVideoBlock"
+import EmbroiderySlideshowBlock from "../src/components/blocks/EmbroiderySlideshowBlock"
 
 export type Window = {
             id: number,
@@ -164,6 +166,8 @@ function AmbiancePage(){
                             {w.type === "pomodoro-timer" && <PomodoroTimerBlock/>}
                             {w.type === "fortune-cookie" && <FortuneCookieBlock/>}
                             {w.type === "toilet-paper" && <ToiletPaperBlock/>}
+                            {w.type === "youtube-video" && <YouTubeVideoBlock/>}
+                            {w.type === "embroidery-slideshow" && <EmbroiderySlideshowBlock/>}
                         </WindowWrapper>
                     ))
                 }

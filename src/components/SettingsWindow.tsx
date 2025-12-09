@@ -11,6 +11,7 @@ function SettingsWindow () {
         <div className="settings-window">
             <div className="window-header" style={{height: "35px", backgroundColor: "white", border: "var(--inner-border)"}}>
                 Settings
+                <button className="small-close-button">x</button>
             </div>
             <div style={{display: "flex", flexDirection: "row", height: "calc(100% - 35px)"}}>
                 <div className="settings-tabs">
