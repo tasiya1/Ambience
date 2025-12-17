@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 
+const td = "ˑ"
+
+function f(t:number){
+    return t.toString().padStart(2, "0")
+}
+
 function ClockBlock () {
 
-    const [time, setTime] = useState(new Date().getHours() + ":" + new Date().getMinutes());
+    const [time, setTime] = useState(f(new Date().getHours()) + td + f(new Date().getMinutes()) + td + f(new Date().getSeconds()));
 
     useEffect(()=> {
         const interval = setInterval (()=>{
-            setTime(new Date().getHours() + ":" + new Date().getMinutes())
-        }, 60000)
+            setTime(f(new Date().getHours()) + td + f(new Date().getMinutes()) + td + f(new Date().getSeconds()))
+        }, 1000)
 
-        return () => clearInterval(interval)
+        return () => clearInterval(interval) 
     }, [])
 
     return(

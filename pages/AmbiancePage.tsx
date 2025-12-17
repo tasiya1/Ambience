@@ -20,6 +20,8 @@ import FortuneCookieBlock from "../src/components/blocks/FortuneCookieBlock"
 import ToiletPaperBlock from "../src/components/blocks/ToiletPaperBlock"
 import YouTubeVideoBlock from "../src/components/blocks/YouTubeVideoBlock"
 import EmbroiderySlideshowBlock from "../src/components/blocks/EmbroiderySlideshowBlock"
+import CookingTimer from "../src/components/blocks/CookingTimer"
+import OftenUsedLinks from "../src/components/blocks/OftenUsedLinksWindow"
 
 export type Window = {
             id: number,
@@ -138,6 +140,7 @@ function AmbiancePage(){
 
         switchMenuVisibility("add-window")
         setWindows(prev => {
+            if (type === "clock" && prev.some(w => w.type === "clock")) { alert("There is already clock on the page"); return prev;}
             const updatedWindowArray = [...prev, newWindow]
             return setWindowLayout(updatedWindowArray)
         })
@@ -156,7 +159,7 @@ function AmbiancePage(){
 
                             {w.type === "picture" && <PictureBlock/>}
                             {w.type === "notes" && <NotesBlock/>}
-                            {w.type === "clock" && <ClockBlock/>}
+                            {w.type === "clock" && <ClockBlock key={w.id}/>}    
                             {w.type === "todo-list" && <ToDoListBlock/>}
                             {w.type === "empty" && <EmptyBlock/>}
                             {w.type === "chibbidibbey" && <ChibbiDibbey/>}
@@ -168,6 +171,8 @@ function AmbiancePage(){
                             {w.type === "toilet-paper" && <ToiletPaperBlock/>}
                             {w.type === "youtube-video" && <YouTubeVideoBlock/>}
                             {w.type === "embroidery-slideshow" && <EmbroiderySlideshowBlock/>}
+                            {w.type === "cooking-timer" && <CookingTimer/>}
+                            {w.type === "often-used-links" && <OftenUsedLinks/>}
                         </WindowWrapper>
                     ))
                 }

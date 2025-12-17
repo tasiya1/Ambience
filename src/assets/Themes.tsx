@@ -2,19 +2,23 @@
 export type ThemeName = keyof typeof themes;
 
 type Theme = {
+        "--window-header-color": string, 
         "--main-theme-color": string,
         "--main-theme-background-color": string,
         "--accent-color": string,
         "--notebook-bg-image": string,
         "--todo-list-bg-image": string,
         "--clock-bg-image": string,
-        "--font-color": string
+        "--font-color": string,
+        "--background-font-color": string
 }
 
 export const themes = {
     lilac: {
+        "--window-header-color": "#E5B7ED", 
         "--main-theme-color": "#E5B7ED",
         "--main-theme-background-color": "#1f1f1f",
+        "--background-font-color": "#efefef",
         "--accent-color": "#f1edac",
         "--notebook-bg-image": "url(https://images.unsplash.com/photo-1629196914168-3a2652305f9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHVycGxlJTIwcGFwZXJ8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000)",
         "--todo-list-bg-image": "url(https://i.pinimg.com/736x/24/ce/20/24ce20015e788d39c0006d219c9c4dbe.jpg)",
@@ -28,8 +32,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     frutiger_aero: {
+        "--window-header-color": "#228dffff", 
         "--main-theme-color": "#228dffff",
         "--main-theme-background-color": "#b5f6ffff",
+        "--background-font-color": "#0016a3ff",
         "--accent-color": "#ff6f00ff",
         "--notebook-bg-image": "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuDEzd77BSFDRNElD9f4yv9Iqcz8v6m0piMgfEcY7yKpI2dSC-C3ZLT1bZZl1qIQfqhKU&usqp=CAU)",
         "--todo-list-bg-image": "url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Frutiger_Aero_%283%29.jpg/1200px-Frutiger_Aero_%283%29.jpg)",
@@ -44,8 +50,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     typewriter: {
+        "--window-header-color": "#e7bea8ff", 
         "--main-theme-color": "#e7bea8ff",
         "--main-theme-background-color": "#33261fff",
+        "--background-font-color": "#fef4e2ff",
         "--accent-color": "#faf4e9ff",
         "--notebook-bg-image": "url(https://www.shutterstock.com/image-vector/geometric-pattern-diamond-shape-on-260nw-2613685275.jpg)",
         "--todo-list-bg-image": "url(https://images.orientbell.com/media/catalog/product/o/d/odh_diamond_beige_hl.png)",
@@ -59,8 +67,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     pastel: {
+        "--window-header-color": "#ffb5b5ff", 
         "--main-theme-color": "#ffb5b5ff",
         "--main-theme-background-color": "#f6f2f1ff",
+        "--background-font-color": "#d03d46ff",
         "--accent-color": "#ef6381ff",
         "--notebook-bg-image": "url(https://i.pinimg.com/736x/81/24/d6/8124d6aea68abf42820a0eae0102f9fd.jpg)",
         "--todo-list-bg-image": "url(https://static.vecteezy.com/system/resources/previews/005/269/515/non_2x/love-heart-pattern-pink-pastel-seamless-background-free-vector.jpg)",
@@ -74,8 +84,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     cyberpunk: {
+        "--window-header-color": "#1c1327ff", 
         "--main-theme-color": "#1c1327ff",
         "--main-theme-background-color": "#202020ff",
+        "--background-font-color": "#cff9ffff",
         "--accent-color": "#820fdbff",
         "--notebook-bg-image": "url(https://i.ytimg.com/vi/e1ynOu30S7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBOOWPwuLf3p7bHm0u_Emx319q1Tg)",
         "--todo-list-bg-image": "url(https://img.freepik.com/premium-vector/futuristic-abstract-technology-cyberpunk-wallpaper_636138-1939.jpg)",
@@ -89,8 +101,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     forest: {
+        "--window-header-color": "#c9d7d0ff", 
         "--main-theme-color": "#c9d7d0ff",
         "--main-theme-background-color": "#1e2221ff",
+        "--background-font-color": "#c0f8eaff",
         "--accent-color": "#abedffff",
         "--notebook-bg-image": "url(https://garden.spoonflower.com/c/9160006/p/f/m/niSo-qhJ0r5QOfoJW2nf0pt4eVcEKO_LnBKeJQMZ01jNkCh1-dxbEg/Couched%20Diamond%20-%20Stonewashed%20-%20Small%20-%20Cream%20Light%20Aqua.jpg)",
         "--todo-list-bg-image": "url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9yZXN0JTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D)",
@@ -104,8 +118,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     soft_white: {
+        "--window-header-color": "#fff", 
         "--main-theme-color": "#fff",
         "--main-theme-background-color": "#e2e2e2ff",
+        "--background-font-color": "#181818ff",
         "--accent-color": "#71e0ffff",
         "--notebook-bg-image": "linear-gradient(180deg,rgba(250, 250, 250, 1) 0%, rgba(255, 255, 255, 1) 100%)",
         "--todo-list-bg-image": "url(https://i.pinimg.com/736x/f5/a2/44/f5a24493c5efc5d3c8fdcb3a3531cc15.jpg)",
@@ -119,8 +135,10 @@ export const themes = {
         "--window-container-background": "#fff"
     },
     soft_black: {
+        "--window-header-color": "#232323ff", 
         "--main-theme-color": "#232323ff",
         "--main-theme-background-color": "#0e0e0eff",
+        "--background-font-color": "#dbdbdbff",
         "--accent-color": "#8e7de1ff",
         "--notebook-bg-image": "linear-gradient(180deg, #191919ff 0%, #1f1f1fff 100%)",
         "--todo-list-bg-image": "url(https://nighteye.app/wp-content/uploads/2020/04/claudio-testa-fb_CZ4hZXWo-unsplash.jpg)",
@@ -132,6 +150,57 @@ export const themes = {
         "--content-border-radius": "10px",
         "--box-shadow": "0px 10px 15px -3px rgba(0,0,0,0.1)",
         "--window-container-background": "#000"
+    },
+    breeze: {
+        "--window-header-color": "#a6fcffff", 
+        "--main-theme-color": "#a6fcffff",
+        "--main-theme-background-color": "#2c2419ff",
+        "--background-font-color": "#fffcf7ff",
+        "--accent-color": "#ffd500ff",
+        "--notebook-bg-image": "linear-gradient(180deg, #e9f8ffff 0%, #e7f8ffff 100%)",
+        "--todo-list-bg-image": "#fcffe8ff",
+        "--clock-bg-image": "#fcffe8ff",
+        "--font-color": "#2c2419ff",
+        "--windows-gap": "0px",
+        "--border": "2px solid black",
+        "--inner-border": "1px solid black",
+        "--content-border-radius": "0px",
+        "--box-shadow": "none",
+        "--window-container-background": "#fff"
+    },
+    lime: {
+        "--window-header-color": "#e7ffb0ff", 
+        "--main-theme-color": "#e7ffb0ff",
+        "--main-theme-background-color": "#0d1b25ff",
+        "--background-font-color": "#fcffe8ff",
+        "--accent-color": "#4625eeff",
+        "--notebook-bg-image": "linear-gradient(180deg, #edffdbff 0%, #f9ffe5ff 100%)",
+        "--todo-list-bg-image": "#fcffe8ff",
+        "--clock-bg-image": "#fcffe8ff",
+        "--font-color": "#211e2aff",
+        "--windows-gap": "0px",
+        "--border": "2px solid black",
+        "--inner-border": "1px solid black",
+        "--content-border-radius": "0px",
+        "--box-shadow": "none",
+        "--window-container-background": "#fff"
+    },
+    cherry_varenyk: {
+        "--window-header-color": "#e53451ff", 
+        "--main-theme-color": "whitesmoke",
+        "--main-theme-background-color": "#250d0fff",
+        "--background-font-color": "#fcffe8ff",
+        "--accent-color": "#ee2543ff",
+        "--notebook-bg-image": "linear-gradient(180deg, #fffaddff 0%, #fffbf4ff 100%)",
+        "--todo-list-bg-image": "#fcffe8ff",
+        "--clock-bg-image": "#fcffe8ff",
+        "--font-color": "#81121dff",
+        "--windows-gap": "0px",
+        "--border": "2px solid black",
+        "--inner-border": "1px solid black",
+        "--content-border-radius": "0px",
+        "--box-shadow": "none",
+        "--window-container-background": "#fff"
     }
 }
 

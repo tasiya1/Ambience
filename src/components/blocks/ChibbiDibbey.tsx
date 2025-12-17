@@ -7,6 +7,14 @@ const sparkles = {
     happiness: "❤︎"
 }
 
+export type ChibbiDibbey = {
+        name: string,
+        health: number,
+        bored: number,
+        huungry: number,
+        happiness: number
+    }
+
 function spawnSparkles(e: any, typeOfSparkle: keyof typeof sparkles) {
     const sparkle = document.createElement("span")
     sparkle.innerHTML = sparkles[typeOfSparkle]
@@ -43,7 +51,7 @@ export function highlightFeature(feature: HTMLElement) {
 
 function ChibbiDibbey() {
 
-    const [chibbidibbey, updateChibbidibbey] = useState({
+    const [chibbidibbey, updateChibbidibbey] = useState<ChibbiDibbey>({
         name: "Tib",
         health: 10,
         bored: 10,

@@ -2,7 +2,7 @@ type WindowOptionsProps = {
     onAddWindow: (type: WindowType) => void
 }
 
-export type WindowType = "picture" | "notes"| "clock" | "todo-list" | "empty" | "chibbidibbey" | "random-color" | "random-idea" | "roll-dice" | "toilet-paper" | "fortune-cookie" | "pomodoro-timer" | "youtube-video" | "embroidery-slideshow"
+export type WindowType = "picture" | "notes"| "clock" | "todo-list" | "empty" | "chibbidibbey" | "random-color" | "random-idea" | "roll-dice" | "toilet-paper" | "fortune-cookie" | "pomodoro-timer" | "youtube-video" | "embroidery-slideshow" | "cooking-timer" | "often-used-links"
 
 function WindowOptions ({onAddWindow} : WindowOptionsProps){
     return (
@@ -15,10 +15,12 @@ function WindowOptions ({onAddWindow} : WindowOptionsProps){
             <div className="options-grid">
                 <button className="window-type-button" onClick={() => onAddWindow("picture")}>Picture</button>
                 <button className="window-type-button" onClick={() => onAddWindow("notes")}>Notes</button>
-                <button className="window-type-button" onClick={() => onAddWindow("clock")}>Clock</button>
+                <button className="window-type-button" onClick={() => onAddWindow("clock")} >Clock</button>
                 <button className="window-type-button" onClick={() => onAddWindow("todo-list")}>To-do list</button>
+                <button className="window-type-button" onClick={() => onAddWindow("often-used-links")}>Your URL Shortcuts</button>
                 <button className="window-type-button" onClick={() => onAddWindow("pomodoro-timer")}>Pomodoro timer</button>
                 <button className="window-type-button" onClick={() => onAddWindow("empty")}>Empty</button>
+                <button className="window-type-button" onClick={() => onAddWindow("cooking-timer")}>Cooking Timer</button>
             </div>
             
             <hr></hr>
