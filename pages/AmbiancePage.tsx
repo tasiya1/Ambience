@@ -23,6 +23,7 @@ import EmbroiderySlideshowBlock from "../src/components/blocks/EmbroiderySlidesh
 import CookingTimer from "../src/components/blocks/CookingTimer"
 import OftenUsedLinks from "../src/components/blocks/OftenUsedLinksWindow"
 import ScribblesBlock from "../src/components/blocks/ScribblesBlock"
+import ClickerBlock from "../src/components/blocks/ClickerBlock"
 
 export type Window = {
             id: number,
@@ -175,6 +176,7 @@ function AmbiancePage(){
                             {w.type === "cooking-timer" && <CookingTimer/>}
                             {w.type === "often-used-links" && <OftenUsedLinks/>}
                             {w.type === "scribbles" && <ScribblesBlock/>}
+                            {w.type === "clicker" && <ClickerBlock/>}
                         </WindowWrapper>
                     ))
                 }

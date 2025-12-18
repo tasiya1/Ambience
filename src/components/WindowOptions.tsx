@@ -2,7 +2,7 @@ type WindowOptionsProps = {
     onAddWindow: (type: WindowType) => void
 }
 
-export type WindowType = "picture" | "notes"| "clock" | "todo-list" | "empty" | "chibbidibbey" | "random-color" | "random-idea" | "roll-dice" | "toilet-paper" | "fortune-cookie" | "pomodoro-timer" | "youtube-video" | "embroidery-slideshow" | "cooking-timer" | "often-used-links" | "scribbles"
+export type WindowType = "picture" | "notes"| "clock" | "todo-list" | "empty" | "chibbidibbey" | "random-color" | "random-idea" | "roll-dice" | "toilet-paper" | "fortune-cookie" | "pomodoro-timer" | "youtube-video" | "embroidery-slideshow" | "cooking-timer" | "often-used-links" | "scribbles" | "clicker"
 
 function WindowOptions ({onAddWindow} : WindowOptionsProps){
     return (
@@ -28,6 +28,7 @@ function WindowOptions ({onAddWindow} : WindowOptionsProps){
             <h3>Playful</h3>
             <div className="options-grid">
                 <button className="window-type-button" onClick={() => onAddWindow("chibbidibbey")}>ChibbiDibbey</button>
+                <button className="window-type-button" onClick={() => onAddWindow("clicker")}>Clicker</button>
                 <button className="window-type-button" onClick={() => onAddWindow("toilet-paper")}>Toilet paper roll</button>
                 <button className="window-type-button" onClick={() => onAddWindow("roll-dice")}>Roll a dice</button>
                 <button className="window-type-button" onClick={() => onAddWindow("fortune-cookie")}>Fortune cookie</button>
