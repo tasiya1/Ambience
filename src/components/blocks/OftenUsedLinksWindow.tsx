@@ -2,19 +2,28 @@ import { useState } from "react"
 
 type Link = {
     title: string,
-    url: string
+    url: string,
+    favIconUrl: string
 }
 
 function OftenUsedLinks() {
 
-    const [links, setLinks] = useState<Link[]>([{title: "Pinterest", url: "https://www.pinterest.com/"}])
+    const regExp = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+    const regex = new RegExp(regExp)
+
+
+    const [links, setLinks] = useState<Link[]>([{title: "Pinterest", url: "https://www.pinterest.com/", favIconUrl: "https://www.google.com/s2/favicons?sz=64&domain=www.pinterest.com"}])
     const [writingLinkMode, setWritingLinkMode] = useState<boolean>(false)
     const [linkInput, setLinkInput] = useState<string>("")
     const [linkTitleInput, setLinkTitleInput] = useState<string>("")
 
     const addLink = () => {
-        if (linkInput == "") return
-        setLinks([...links, {title: linkTitleInput, url: linkInput}])
+        if (linkInput == "" || !linkInput.match(regex)) return
+
+        setLinks([...links, {
+            title: linkTitleInput, 
+            url: linkInput, 
+            favIconUrl: `https://www.google.com/s2/favicons?sz=64&domain=${new URL(linkInput).hostname}`}])
         setWritingLinkMode(false)
         setLinkInput("")
         setLinkTitleInput("")
@@ -28,7 +37,7 @@ function OftenUsedLinks() {
         <div className="links-window">
             {links?.map((u) => (
                 <a className="url-shortcut" href={u.url} target="_blank">
-                    {u.title || u.url}
+                    <img src={u.favIconUrl}></img>{u.title || u.url}
                 </a>))}
             
             {writingLinkMode ? <div className="url-shortcut enter-url-mode">

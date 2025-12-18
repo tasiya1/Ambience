@@ -22,6 +22,7 @@ import YouTubeVideoBlock from "../src/components/blocks/YouTubeVideoBlock"
 import EmbroiderySlideshowBlock from "../src/components/blocks/EmbroiderySlideshowBlock"
 import CookingTimer from "../src/components/blocks/CookingTimer"
 import OftenUsedLinks from "../src/components/blocks/OftenUsedLinksWindow"
+import ScribblesBlock from "../src/components/blocks/ScribblesBlock"
 
 export type Window = {
             id: number,
@@ -173,6 +174,7 @@ function AmbiancePage(){
                             {w.type === "embroidery-slideshow" && <EmbroiderySlideshowBlock/>}
                             {w.type === "cooking-timer" && <CookingTimer/>}
                             {w.type === "often-used-links" && <OftenUsedLinks/>}
+                            {w.type === "scribbles" && <ScribblesBlock/>}
                         </WindowWrapper>
                     ))
                 }

@@ -866,6 +866,8 @@ body {
     font-weight: 900;
     cursor: pointer;
     color: var(--accent-color);
+    display: flex;
+    align-items: center;
 }
 
 a.url-shortcut:hover {
@@ -874,6 +876,11 @@ background: #ff002f;
     background-size: 400% 400%;
     animation: slush 4s ease infinite;
     color: whitesmoke;
+}
+
+.url-shortcut img {
+    height: 50px;
+    margin-right: 15px;
 }
 
 .enter-url-mode {
@@ -896,7 +903,12 @@ background: #ff002f;
 
 .save-url-button {
     border-radius: 0;
-    background-color: var(--window-header-color);
+    background-color: var(--accent-color);
     margin: 5px;
     color: var(--font-color);
+}
+
+.scribble-canvas {
+    border: var(--border);
+    overflow: hidden;
 }
