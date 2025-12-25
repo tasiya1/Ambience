@@ -175,8 +175,9 @@ function AmbiancePage(){
                             {w.type === "embroidery-slideshow" && <EmbroiderySlideshowBlock/>}
                             {w.type === "cooking-timer" && <CookingTimer/>}
                             {w.type === "often-used-links" && <OftenUsedLinks/>}
-                            {w.type === "scribbles" && <ScribblesBlock/>}
+                            {w.type === "scribbles" && <ScribblesBlock />}
                             {w.type === "clicker" && <ClickerBlock/>}
+                            {w.type === "doodle" && <ScribblesBlock/>}
                         </WindowWrapper>
                     ))
                 }
