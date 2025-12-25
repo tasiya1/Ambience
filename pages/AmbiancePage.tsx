@@ -99,8 +99,8 @@ function AmbiancePage(){
     const [windows, setWindows] = useState([
         {
             id: 1,
-            type: "todo-list",
-            title: `todo-list`,
+            type: "scribbles",
+            title: `scribbles`,
             src: "",
             colStart: 1,
             colSpan: 8,

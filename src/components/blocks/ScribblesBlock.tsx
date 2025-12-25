@@ -2,175 +2,169 @@ import { useEffect, useRef, useState } from "react"
 import { getRandomColor } from "./RandomColorBlock"
 
 interface RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D) : void 
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D, path: Point[]) : void
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D) : void
+    penDown({p, ctx} : DrawContext) : void 
+    penMove({p, ctx} : DrawContext) : void
+    penUp({p, ctx} : DrawContext) : void
 }
 
-class DefaultLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+interface DrawContext {
+    ctx: CanvasRenderingContext2D,
+    p: Point
+    //,path: Point[]
+}
+
+abstract class BaseLine implements RandomEffect {
+    title: string
+    constructor() { this.title = "" }
+    penDown({p, ctx} : DrawContext): void {
         if (ctx){
+            ctx.save()
             ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+            ctx.moveTo(p.x, p.y)
         }
     }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D, _path: Point[]): void {
+    
+    penUp({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX , e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
+            ctx.restore()
+        }
+    }    
+    
+    abstract penMove({p, ctx} : DrawContext): void
+}
+
+class DefaultLine extends BaseLine {
+    constructor () { super(); this.title = "Default line" }
+    
+    penMove({p, ctx} : DrawContext): void {
+        if (ctx) {
+            ctx.lineTo(p.x, p.y)
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
 
 }
 
-class JiggleLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx){
-            ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+class JiggleLine extends BaseLine {
+    constructor () { super(); this.title = "Jiggle Line" }
+    
+    penMove({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX + (Math.random()*10-20), e.nativeEvent.offsetY + (Math.random()*10-20))
+            ctx.lineTo(p.x + 10 - (Math.random()*20), p.y + 10 - (Math.random()*20))
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
 
 }
 
-class CrazyColorsLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx){
-            ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+class CrazyColorsLine extends BaseLine {
+    constructor () { super(); this.title = "Crazy Colors" }
+    
+    penMove({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX , e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
             ctx.strokeStyle = getRandomColor()
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+    penUp({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
             ctx.strokeStyle = document.documentElement.style.getPropertyValue("--font-color")
         }
     }
 
 }
 
-class BarCodeLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx){
-            ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+class BarCodeLine extends BaseLine {
+    constructor () { super(); this.title = "Bar Code Line" }
+    
+    penMove({p, ctx} : DrawContext): void {
         if (ctx) {
             ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY - 20)
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY + 20)
+            ctx.moveTo(p.x, p.y - 20)
+            ctx.lineTo(p.x, p.y + 20)
             ctx.lineWidth = Math.random() * 5
-            ctx.fillText(Math.floor(Math.random()*9).toString(), e.nativeEvent.offsetX, e.nativeEvent.offsetY + 30)
+            ctx.fillText(Math.floor(Math.random()*9).toString(), p.x, p.y + 30)
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+    penUp({p, ctx} : DrawContext): void {
         if (ctx) {
             ctx.closePath()
+            ctx.restore()
         }
     }
 }
 
-class CurvicLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx){
-            ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+class CurvyLine extends BaseLine {
+    constructor () { super(); this.title = "Curvy Line" }
+    
+    penMove({p, ctx} : DrawContext): void {
         if (ctx) {
-            const x = e.nativeEvent.offsetX
-            const y = e.nativeEvent.offsetY
+            const x = p.x
+            const y = p.y
             const cp1 = {x: x+20-Math.random()*40, y: y+20-Math.random()*40}
             const cp2 = {x: x+20-Math.random()*40, y: y+20-Math.random()*40}
             ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, x, y)
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
 
 }
 
-class RoadMapLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+class RoadMapLine extends BaseLine {
+    constructor () { super(); this.title = "Roadmap Line" }
+    penDown({p, ctx} : DrawContext): void {
         if (ctx){
+            ctx.lineWidth = 3
             ctx.beginPath()
-            ctx.arc(e.nativeEvent.offsetX, e.nativeEvent.offsetY, 10, 0, Math.PI*2, false)
+            ctx.arc(p.x, p.y, 10, 0, Math.PI*2, false)
             ctx.fill()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+            ctx.stroke()
+            ctx.moveTo(p.x, p.y)
 
             ctx.setLineDash([10, 5])
         }
     }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D, path: Point[]): void {
+    penMove({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX , e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+    penUp({p, ctx} : DrawContext): void {
+        const off = 10
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
 
-            ctx.moveTo(e.nativeEvent.offsetX-10, e.nativeEvent.offsetY-10)
-            ctx.lineTo(e.nativeEvent.offsetX+10, e.nativeEvent.offsetY+10)
+            ctx.moveTo(p.x-off, p.y-off)
+            ctx.lineTo(p.x+off, p.y+off)
 
-            ctx.moveTo(e.nativeEvent.offsetX+10, e.nativeEvent.offsetY-10)
-            ctx.lineTo(e.nativeEvent.offsetX-10, e.nativeEvent.offsetY+10)
+            ctx.moveTo(p.x+off, p.y-off)
+            ctx.lineTo(p.x-off, p.y+off)
             ctx.stroke()
 
+            ctx.lineWidth = 2
             ctx.setLineDash([])
         }
     }
 
 }
 
-class LassoLine implements RandomEffect {
-    penDown(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
-        if (ctx){
-            ctx.beginPath()
-            ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }
-    }
-    penMove(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+class LassoLine extends BaseLine {
+    constructor () { super(); this.title = "Lasso" }
+    
+    penMove({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX , e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
             ctx.stroke()
         }
     }
-    penUp(e: React.MouseEvent<HTMLCanvasElement>, ctx : CanvasRenderingContext2D): void {
+    penUp({p, ctx} : DrawContext): void {
         if (ctx) {
-            ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+            ctx.lineTo(p.x, p.y)
             ctx.fill()
         }
     }
@@ -182,7 +176,7 @@ const randomEffects = [
     new JiggleLine(),
     new CrazyColorsLine(),
     new BarCodeLine(),
-    new CurvicLine(),
+    new CurvyLine(),
     new LassoLine(),
     new RoadMapLine()
 ]
@@ -192,10 +186,11 @@ export type Point = { x: number, y: number }
 function ScribblesBlock() {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
+    const pathRef = useRef<Point[]>([])
+
     const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
     const [isDrawing, setIsDrawing] = useState<boolean>(false)
     const [randomEffect, setRandomEffect] = useState<RandomEffect | null>(randomEffects[randomEffects.length-1])
-    const [path, setPath] = useState<Point[]>([])
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -207,34 +202,46 @@ function ScribblesBlock() {
         ctx.fillStyle = document.documentElement.style.getPropertyValue("--font-color")
     }, [])
 
-    const changeEffect = () => {
-        const r = Math.floor(Math.random() * randomEffects.length)
-        setRandomEffect(randomEffects[r])
+    const changeEffect = (e: React.MouseEvent<HTMLCanvasElement>, ctx: CanvasRenderingContext2D) => {
+        const effect = randomEffects[Math.floor(Math.random() * randomEffects.length)]
+        setRandomEffect(effect)
+        const dctx : DrawContext = {
+            ctx: ctx,
+            p: {x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY}
+        }
+        effect.penDown(dctx)
     }
 
     const addPathPoint = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        setPath(prev => ([...prev, {x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY}]))
+        //pathRef.current.push({x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY})
     }
 
     const penDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        changeEffect()
-        randomEffect?.penDown(e, ctxRef.current as CanvasRenderingContext2D)
+        changeEffect(e, ctxRef.current as CanvasRenderingContext2D)
         setIsDrawing(true)
-        
     }
 
     const penMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
         if (!isDrawing) return
-        randomEffect?.penMove(e, ctxRef.current as CanvasRenderingContext2D, path)
+        randomEffect?.penMove({
+            ctx: ctxRef.current, 
+            p: {x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY}} as DrawContext)
     }
 
     const penUp = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        randomEffect?.penUp(e, ctxRef.current as CanvasRenderingContext2D)
+        randomEffect?.penUp({
+            ctx: ctxRef.current, 
+            p: {x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY}} as DrawContext)
         setIsDrawing(false)
     }
 
+    const finishDrawing = () => {
+        setIsDrawing(false)
+        ctxRef.current?.closePath()
+    }
+
     return (<div>
-        <canvas ref={canvasRef} className="scribble-canvas" onMouseDown={penDown} onMouseMove={penMove} onMouseUp={penUp} onMouseLeave={penUp} width={2000} height={900}></canvas>
+        <canvas ref={canvasRef} className="scribble-canvas" onMouseDown={penDown} onMouseMove={penMove} onMouseUp={penUp} onMouseLeave={finishDrawing} width={2000} height={900}></canvas>
     </div>)
 
 
