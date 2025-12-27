@@ -138,16 +138,16 @@ class RoadMapLine extends BaseLine {
         const off = 10
         if (ctx) {
             ctx.lineTo(p.x, p.y)
-
+            ctx.closePath()
+            ctx.setLineDash([])
+            ctx.beginPath()
             ctx.moveTo(p.x-off, p.y-off)
             ctx.lineTo(p.x+off, p.y+off)
 
             ctx.moveTo(p.x+off, p.y-off)
             ctx.lineTo(p.x-off, p.y+off)
             ctx.stroke()
-
             ctx.lineWidth = 2
-            ctx.setLineDash([])
         }
     }
 
@@ -183,14 +183,18 @@ const randomEffects = [
 
 export type Point = { x: number, y: number }
 
-function ScribblesBlock() {
+interface ScribblesBlockProps {
+    isRandomEffect: boolean
+}
+
+function ScribblesBlock({ isRandomEffect } : ScribblesBlockProps) {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const pathRef = useRef<Point[]>([])
 
     const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
     const [isDrawing, setIsDrawing] = useState<boolean>(false)
-    const [randomEffect, setRandomEffect] = useState<RandomEffect | null>(randomEffects[randomEffects.length-1])
+    const [randomEffect, setRandomEffect] = useState<BaseLine | null>(randomEffects[0])
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -217,7 +221,8 @@ function ScribblesBlock() {
     }
 
     const penDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        changeEffect(e, ctxRef.current as CanvasRenderingContext2D)
+        if (isRandomEffect) changeEffect(e, ctxRef.current as CanvasRenderingContext2D)
+            ctxRef.current?.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
         setIsDrawing(true)
     }
 
@@ -241,6 +246,7 @@ function ScribblesBlock() {
     }
 
     return (<div>
+        <p style={{float: "right"}}>current effect - {randomEffect?.title}</p>
         <canvas ref={canvasRef} className="scribble-canvas" onMouseDown={penDown} onMouseMove={penMove} onMouseUp={penUp} onMouseLeave={finishDrawing} width={2000} height={900}></canvas>
     </div>)
 

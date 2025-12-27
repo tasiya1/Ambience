@@ -1005,3 +1005,60 @@ background: #ff002f;
     width: 100%;
     margin: 20px 0;
 }
+
+.roadmap-block {
+    width: 100%;
+    height: 100%;
+}
+
+.roadmap-item {
+    display: flex;
+    margin: 5px;
+    align-items: center;
+}
+
+.roadmap-pin {
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 50%;
+    border: 2px solid var(--font-color);
+    margin: 5px;
+}
+.roadmap-pin-title {
+    width: 100%;
+    min-height: 40px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.r-pin-checked {
+    background-color: var(--accent-color);
+}
+
+.add-roadmap-pin-button {
+    margin: 10px;
+    width: fit-content;
+    padding: 10px;
+    cursor: pointer;
+    border: var(--border);
+    border-radius: var(--content-border-radius);
+}
+
+.add-roadmap-pin-button:hover {
+    background-color: var(--accent-color);
+
+}
+
+.roadmap-connect-line {
+    position: absolute;
+    display: block;
+    left: 24px;
+    transform: translateY(30px);
+    width: 2px;
+    height: 15px;
+    background-color: var(--font-color);
+}

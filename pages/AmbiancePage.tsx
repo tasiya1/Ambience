@@ -24,6 +24,7 @@ import CookingTimer from "../src/components/blocks/CookingTimer"
 import OftenUsedLinks from "../src/components/blocks/OftenUsedLinksWindow"
 import ScribblesBlock from "../src/components/blocks/ScribblesBlock"
 import ClickerBlock from "../src/components/blocks/ClickerBlock"
+import RoadmapBlock from "../src/components/blocks/RoadmapBlock"
 
 export type Window = {
             id: number,
@@ -99,8 +100,8 @@ function AmbiancePage(){
     const [windows, setWindows] = useState([
         {
             id: 1,
-            type: "scribbles",
-            title: `scribbles`,
+            type: "roadmap",
+            title: `new-roadmap`,
             src: "",
             colStart: 1,
             colSpan: 8,
@@ -175,9 +176,10 @@ function AmbiancePage(){
                             {w.type === "embroidery-slideshow" && <EmbroiderySlideshowBlock/>}
                             {w.type === "cooking-timer" && <CookingTimer/>}
                             {w.type === "often-used-links" && <OftenUsedLinks/>}
-                            {w.type === "scribbles" && <ScribblesBlock />}
+                            {w.type === "scribbles" && <ScribblesBlock isRandomEffect={true}/>}
                             {w.type === "clicker" && <ClickerBlock/>}
-                            {w.type === "doodle" && <ScribblesBlock/>}
+                            {w.type === "doodle" && <ScribblesBlock isRandomEffect={false}/>}
+                            {w.type === "roadmap" && <RoadmapBlock/>}
                         </WindowWrapper>
                     ))
                 }
