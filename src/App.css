@@ -1024,7 +1024,17 @@ background: #ff002f;
     border-radius: 50%;
     border: 2px solid var(--font-color);
     margin: 5px;
+    cursor: pointer;
 }
+
+.roadmap-pin:hover {
+    border: 2px solid var(--accent-color);
+}
+
+.roadmap-pin:hover.r-pin-checked {
+    border: 2px solid var(--font-color);
+}
+
 .roadmap-pin-title {
     width: 100%;
     min-height: 40px;
@@ -1061,4 +1071,54 @@ background: #ff002f;
     width: 2px;
     height: 15px;
     background-color: var(--font-color);
+}
+
+.contact-devs-form {
+    margin: 10px 0px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-devs-form * {
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+}
+
+.contact-devs-name {
+
+}
+
+.contact-devs-topic {
+
+}
+
+.contact-devs-letter {
+    width: 100%;
+}
+
+.fill-game-menu {
+    width: 100%;
+    height: calc(100% - 10px);
+    display: grid;
+    gap: var(--windows-gap);
+    grid-template-columns: 1fr 1fr;
+}
+
+.fill-game-menu-level-button {
+    border: var(--border);
+    margin: -1px;
+    background-color: var(--accent-color);
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: var(--content-border-radius);
+}
+
+.fill-game-menu-level-button:hover {
+    transform: translate(5px, -7px);
 }
