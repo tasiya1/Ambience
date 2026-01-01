@@ -23,7 +23,7 @@ function WindowWrapper ({id,    title, colStart, colSpan, rowStart, rowSpan, onD
     <div className="window" style={{gridColumn: `${colStart} / span ${colSpan}`, gridRow: `${rowStart} / span ${rowSpan}`}}>
         <div className="window-header">
             <span className="window-title">{title}</span>
-            <button className="window-close" onClick={() => onDelete(id)}>✖</button>
+            <button className="window-close" onClick={() => onDelete(id)}>x</button>
         </div>
         <div className="window-content">{children}</div>
     </div>

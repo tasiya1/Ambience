@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const td = "ˑ"
+const td =  ":"//"ˑ"
 
 function f(t:number){
     return t.toString().padStart(2, "0")

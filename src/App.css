@@ -22,6 +22,11 @@
     --embroidery: url(https://i.pinimg.com/1200x/7e/1d/8b/7e1d8bf3f2acd999cd60ea16e2c08c2c.jpg);
 }
 
+@font-face {
+    font-family: "Digital Upscaled Pixel";
+    src: url(assets/DigitalUpscale-Regular.otf) format("opentype");
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -83,14 +88,17 @@ body {
 
 .window-options {
     position: fixed;
+    height: 80%;
     right: 0;
     display: block;
     background-color: white;
-    border: var(--inner-border);
+    margin: -1px;
     z-index: 100;
     width: 350px;
     opacity: 1;
     transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .window-options h3 {
@@ -104,9 +112,10 @@ body {
 }
 
 .options-grid button {
-    border: var(--inner-border);
+    border: var(--border);
     border-radius: 0;
     padding: 15px 35px;
+    margin: -1px;
 }
 
 .menu-description {
@@ -146,14 +155,16 @@ body {
     border: var(--border);
     border-radius: var(--content-border-radius);
     background: transparent;
-    font-size: 18px;
+    font-size: 15px;
+    line-height: 15px;
+    margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
     cursor: pointer;
     color: var(--font-color);
     width: 40px;
     height: 40px;
+    font-family: "Digital Upscaled Pixel", sans-serif;
 }
 
 .small-close-button {
