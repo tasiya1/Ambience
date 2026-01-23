@@ -1007,9 +1007,11 @@ background: #ff002f;
 }
 
 .roadmap-item {
-    display: flex;
+    display: inline-grid;
     margin: 5px;
     align-items: center;
+    width: 100%;
+    grid-template-columns: 30px auto;
 }
 
 .roadmap-pin {
@@ -1031,7 +1033,6 @@ background: #ff002f;
 }
 
 .roadmap-pin-title {
-    width: 100%;
     min-height: 40px;
     outline: none;
     display: flex;
@@ -1059,12 +1060,11 @@ background: #ff002f;
 }
 
 .roadmap-connect-line {
-    position: absolute;
     display: block;
-    left: 24px;
-    transform: translateY(30px);
+    transform: translateX(14px);
     width: 2px;
-    height: 15px;
+    min-height: 15px;
+    height: calc(100% - 24px);
     background-color: var(--font-color);
 }
 

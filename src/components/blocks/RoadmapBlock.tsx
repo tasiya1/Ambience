@@ -14,9 +14,13 @@ type RoadmapItemProps = {
 function RoadmapItem({ content, index, onCheck } : RoadmapItemProps) {
 
     return <div className="roadmap-item" key={index}>
+        <div style={{height: "100%", width: "30px"}}>
             <div className={`roadmap-pin ${content.checked? "r-pin-checked":""}`} onClick={() => {onCheck(index)}}></div>
-            <div className="roadmap-pin-title" contentEditable="plaintext-only"></div>
             <div className="roadmap-connect-line"></div>
+        </div>
+            
+            <div className="roadmap-pin-title" contentEditable="plaintext-only"></div>
+            
         </div>
 }
 
@@ -24,9 +28,8 @@ function RoadmapBlock() {
 
     const [roadmapItems, setRoadmapItems] = useState<RoadmapItemType[]>([
         { title: "push commit", checked: false },
-        { title: "call jessica", checked: false },
         { title: "take a nap", checked: false },
-        { title: "post tiktok", checked: false },
+        { title: "call jessica", checked: false },
         { title: "take a nap", checked: false },
     ])
 
