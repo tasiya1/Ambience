@@ -1,14 +1,11 @@
-import type { ReactNode } from "react"
-import { setWindowLayout } from "../../pages/AmbiancePage"
-
 interface WindowWrapperProps {
-    id: number
+    id: string
     title: string
     colStart: number
     colSpan: number
     rowStart: number
     rowSpan: number
-    onDelete: (id: number) => void
+    onDelete: (id: string) => void
     children?: React.ReactNode  
 }
 

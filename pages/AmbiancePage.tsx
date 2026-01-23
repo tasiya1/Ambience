@@ -11,7 +11,7 @@ import SettingsWindow from "../src/components/SettingsWindow"
 import FileMenu from "../src/components/FileMenu"
 import ToDoListBlock from "../src/components/blocks/ToDoListBlock"
 import ChibbiDibbey from "../src/components/blocks/ChibbiDibbey"
-import { applyTheme, themes, type ThemeName } from "../src/assets/Themes"
+import { applyTheme, type ThemeName } from "../src/assets/Themes"
 import RandomColorBlock from "../src/components/blocks/RandomColorBlock"
 import IdeasGeneratorBlock from "../src/components/blocks/IdeasGeneratorBlock"
 import RollDiceBlock from "../src/components/blocks/RollDiceBlock"
@@ -26,20 +26,12 @@ import ScribblesBlock from "../src/components/blocks/ScribblesBlock"
 import ClickerBlock from "../src/components/blocks/ClickerBlock"
 import RoadmapBlock from "../src/components/blocks/RoadmapBlock"
 import FillGameBlock from "../src/components/blocks/FillGameBlock"
+import { useDispatch, useSelector } from "react-redux"
+import { addWindow, removeWindow, type WindowItem } from "../src/store/windowsSlice"
+import type { RootState } from "../src/store/store"
 
-export type Window = {
-            id: number,
-            type: string,
-            title: string,
-            src: string,
-            colStart: number,
-            colSpan: number,
-            rowStart: number,
-            rowSpan: number
-}
-
-export function setWindowLayout(windows: Window[]){
-    const windowLayout: Window[] = JSON.parse(JSON.stringify(windows))
+export function setWindowLayout(windows: WindowItem[]){
+    const windowLayout: WindowItem[] = JSON.parse(JSON.stringify(windows))
     const l: number = windowLayout.length
     switch (l) {
 
@@ -98,19 +90,6 @@ function AmbiancePage(){
         applyTheme(saved);
     }, []);
 
-    const [windows, setWindows] = useState([
-        {
-            id: 1,
-            type: "todo-list",
-            title: `todo-list`,
-            src: "",
-            colStart: 1,
-            colSpan: 8,
-            rowStart: 1,
-            rowSpan: 7
-        }
-    ]);
-
     const [visibleMenu, setVisibleMenu] = useState<string|null>(null);
 
 
@@ -118,42 +97,35 @@ function AmbiancePage(){
         setVisibleMenu((prev) => (prev === menuId ? null : menuId))
     }
 
-    const deleteWindow = (id: number) => {
-        setWindows(prev => {
-            const filteredWindowArray = prev.filter((w => w.id !== id));
-            const newWindowLayout = setWindowLayout(filteredWindowArray)
-            return newWindowLayout
-        })
-    };
+    const windows = useSelector((state: RootState) => state.windows)
+    const dispatch = useDispatch()
 
-    const addWindow = (type: WindowType) => {
+    const deleteWindow = (id: string) => {
+        dispatch(removeWindow(id))
+    }
 
-        if (windows.length > 6) return;
-
-        const newId = windows.length + 1
-        var newWindow = {
-            id: newId,
-            type,
-            title: `${type.toLocaleUpperCase()}`,
-            src: "",
-            colStart: 1,
-            colSpan: 4,
-            rowStart: 1,
-            rowSpan: 7
+    const addNewWindow = (type: WindowType) => {
+        if (windows.some(w => w.type === "clock" && type === "clock")) {
+            return
         }
 
+        dispatch(addWindow({
+            type,
+            title: type.toLocaleLowerCase(),
+            src: "",
+            colStart: 1,
+            colSpan: 8,
+            rowStart: 1,
+            rowSpan: 7
+        }))
+
         switchMenuVisibility("add-window")
-        setWindows(prev => {
-            if (type === "clock" && prev.some(w => w.type === "clock")) { alert("There is already clock on the page"); return prev;}
-            const updatedWindowArray = [...prev, newWindow]
-            return setWindowLayout(updatedWindowArray)
-        })
-    }
+    } 
 
     return (
         <div className="app">
             <TopMenu switchMenuVisibility={switchMenuVisibility}/>
-            {visibleMenu === "add-window" && <WindowOptions onAddWindow={addWindow}/>}
+            {visibleMenu === "add-window" && <WindowOptions onAddWindow={addNewWindow}/>}
             {visibleMenu === "settings" && <SettingsWindow/>}
             {visibleMenu === "file-menu" && <FileMenu/>}
             <div className="windows-container">

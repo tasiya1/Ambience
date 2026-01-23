@@ -1,4 +1,3 @@
-type YouTubeVideoBlockProps = null
 
 function YouTubeVideoBlock () {
 

@@ -90,7 +90,7 @@ class BarCodeLine extends BaseLine {
             ctx.stroke()
         }
     }
-    penUp({p, ctx} : DrawContext): void {
+    penUp({p: _p, ctx} : DrawContext): void {
         if (ctx) {
             ctx.closePath()
             ctx.restore()
@@ -190,7 +190,7 @@ interface ScribblesBlockProps {
 function ScribblesBlock({ isRandomEffect } : ScribblesBlockProps) {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
-    const pathRef = useRef<Point[]>([])
+    //const pathRef = useRef<Point[]>([])
 
     const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
     const [isDrawing, setIsDrawing] = useState<boolean>(false)
@@ -215,11 +215,11 @@ function ScribblesBlock({ isRandomEffect } : ScribblesBlockProps) {
         }
         effect.penDown(dctx)
     }
-
+    /*
     const addPathPoint = (e: React.MouseEvent<HTMLCanvasElement>) => {
         //pathRef.current.push({x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY})
     }
-
+    */
     const penDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
         if (isRandomEffect) changeEffect(e, ctxRef.current as CanvasRenderingContext2D)
             ctxRef.current?.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)

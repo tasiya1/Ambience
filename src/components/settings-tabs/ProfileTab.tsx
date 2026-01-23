@@ -33,10 +33,10 @@ const achievements_set = [
 
 function ProfileTab() {
 
-    const [user, setUser] = useState({
+    const [user, ] = useState({
         name: "Tasiya"
     })
-    const [achievements, setAchievements] = useState(achievements_set)
+    const [achievements, ] = useState(achievements_set)
 
     return (<div className="profile-tab">
         <h3>Profile</h3>

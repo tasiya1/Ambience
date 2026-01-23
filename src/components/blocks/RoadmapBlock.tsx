@@ -8,11 +8,10 @@ type RoadmapItemType = {
 type RoadmapItemProps = {
     content: RoadmapItemType,
     index: number,
-    canCheck: boolean,
     onCheck: (index: number) => void
 }
 
-function RoadmapItem({ content, index, canCheck, onCheck } : RoadmapItemProps) {
+function RoadmapItem({ content, index, onCheck } : RoadmapItemProps) {
 
     return <div className="roadmap-item" key={index}>
             <div className={`roadmap-pin ${content.checked? "r-pin-checked":""}`} onClick={() => {onCheck(index)}}></div>
@@ -55,7 +54,7 @@ function RoadmapBlock() {
     return <div className="roadmap-block">
         {
             roadmapItems.map((r, index) => (
-                <RoadmapItem key={index} content={r} index={index} canCheck={index === 0 || roadmapItems[index-1].checked   } onCheck={checkItem}/>
+                <RoadmapItem key={index} content={r} index={index} onCheck={checkItem}/>
             ))
             
         }

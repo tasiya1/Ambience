@@ -5,7 +5,6 @@ function ToiletPaperBlock() {
     const rollSpeed = 0.99
     const rollRotation = 50
     const cartonSize = 50
-    const runningTailLength = window.innerHeight
     const [toiletpaperSize, setToiletpaperSize] = useState(rollSize)
     const [rotationOfRoll, setRotationOfRoll] = useState(0)
     

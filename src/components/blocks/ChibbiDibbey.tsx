@@ -59,7 +59,7 @@ function ChibbiDibbey() {
         happiness: 10
     })
 
-    const setName = (e: any) => {updateChibbidibbey(prev => ({...prev, name: "Tibee"}))}
+    const setName = () => {updateChibbidibbey(prev => ({...prev, name: "Tibee"}))}
     const setHealth = (e: any) => {spawnSparkles(e, "health"); updateChibbidibbey(prev => ({...prev, health: prev.health + 1}))}
     const setBoredom = (e: any) => {spawnSparkles(e, "boredom"); updateChibbidibbey(prev => ({...prev, bored: (prev.bored > 0)?prev.bored - 1 : prev.bored}))}
     

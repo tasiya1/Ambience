@@ -23,7 +23,7 @@ type FillGameLevel = {
     figColor: number[]
     penColor: number[]
 }
-
+/*
 function pointOnCircle(cX : number, 
     cY : number, 
     radius : number, 
@@ -35,7 +35,7 @@ function pointOnCircle(cX : number,
         y: cY + Math.sin(n_cuts_angle*i*2)*radius
     }
 }
-
+*/
 function FillGameBlock () {
 
 const levels : FillGameLevel[] = [
@@ -232,10 +232,6 @@ const levels : FillGameLevel[] = [
         setIsDrawing(false)
     }
 
-    const setCanvasSize = () => {
-
-    }
-
     const finishDrawing = () => {
         setIsDrawing(false)
         ctxRef.current?.closePath()
@@ -296,7 +292,7 @@ const levels : FillGameLevel[] = [
     }
 
     const calculateScore = () => {
-        const [player, figures, empty] = calculateCanvas()
+        const [player, figures, ] = calculateCanvas()
         const calculatedFill = player / fillPercent
         const calculatedDamage = 1 - figures / damagePercent
         const calculatedSuccess = calculatedFill * (figures / damagePercent)

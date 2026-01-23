@@ -10,7 +10,7 @@ function ToDoListBlock () {
 
     return (
         <div className="todo-list">
-            {toDoItems.map((item, index) => (
+            {toDoItems.map((_item, index) => (
                 <ToDoItem key={index} />
             ))}
             <div className="empty-todo-area" onClick={() => addToDoItem()}>+ Add task</div>

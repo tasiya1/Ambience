@@ -1,7 +1,5 @@
 import { useState } from "react"
 
-type toDoItemProps = {}
-
 function ToDoItem () {
 
     const [isChecked, setIsChecked] = useState(false)

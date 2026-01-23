@@ -173,10 +173,6 @@ body {
     outline: none;
 }
 
-.small-close-button:hover {
-
-}
-
 .small-close-button:active {
     background-color: var(--accent-color);
     color: var(--font-color);
@@ -965,18 +961,6 @@ background: #ff002f;
     overflow: auto;
 }
 
-.recipe-description {
-    
-}
-
-.recipe-ingredients {
-
-}
-
-.recipe-ingredient {
-
-}
-
 .recipe-steps {
     margin-left: 40px;
 }
@@ -1095,14 +1079,6 @@ background: #ff002f;
     width: 100%;
     margin: 5px;
     padding: 10px;
-}
-
-.contact-devs-name {
-
-}
-
-.contact-devs-topic {
-
 }
 
 .contact-devs-letter {

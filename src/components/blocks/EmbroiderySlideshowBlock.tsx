@@ -12,7 +12,8 @@ function EmbroiderySlideshowBlock () {
         "https://i.pinimg.com/736x/14/be/fb/14befbc09b5e3d99eb5ebf7e20e0a2af.jpg"
     ]
 
-    const [embIndex, setEmbIndex] = useState(0)
+    //FIX LATER
+    const [, setEmbIndex] = useState(0)
 
     useEffect(() => {
         const interval = setInterval(() => {

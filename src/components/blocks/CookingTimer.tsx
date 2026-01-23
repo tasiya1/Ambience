@@ -45,11 +45,11 @@ function CookingTimer() {
     ]
 
     const [openedRecipe, setOpenedRecipe] = useState<Recipe | null>(null)
-
+    /*
     const closeRecipe = () => {
         setOpenedRecipe(null)
     }
-
+    */
     return (
         openedRecipe ? 
         <RecipeBlock recipe={openedRecipe} closeRecipe={() => setOpenedRecipe(null)}></RecipeBlock>:
