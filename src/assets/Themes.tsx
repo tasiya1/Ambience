@@ -1,6 +1,7 @@
 
 export type ThemeName = keyof typeof themes;
 
+/*
 type Theme = {
         "--window-header-color": string, 
         "--main-theme-color": string,
@@ -12,6 +13,7 @@ type Theme = {
         "--font-color": string,
         "--background-font-color": string
 }
+*/
 
 export const themes = {
     lilac: {
