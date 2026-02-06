@@ -1,7 +1,65 @@
+import { useState, type ChangeEvent } from "react"
 import { applyTheme, themes } from "../../assets/Themes"
 
 function ThemesTab() {
+
+
+    // SETTINGS
+    const [gap, setGap] = useState<boolean>(false)
+    const [borders, setBorders] = useState<boolean>(true)
+    const [headerSize, setHeaderSize] = useState<number>(51)
+    const [cornerRoundness, setCornerRoundness] = useState<number>(0)
+
+    const setNewGap = (e: ChangeEvent<HTMLInputElement>) => {
+        const val = Boolean(e.target.checked)
+        setGap(val)
+        document.documentElement.style.setProperty("--windows-gap", val ? "5px" : "0px")
+    }
+
+    const setNewBorders = (e: ChangeEvent<HTMLInputElement>) => {
+        const val = Boolean(e.target.checked)
+        setBorders(val)
+        document.documentElement.style.setProperty("--border", (val ? "2px solid black" : "none"))
+        document.documentElement.style.setProperty("--inner-border", (val ? "1px solid black" : "none"))
+    }
+
+    const setNewHeaderSize = (e: ChangeEvent<HTMLInputElement>) => {
+        const val = Number(e.target.value)
+        setHeaderSize(val)
+        document.documentElement.style.setProperty("--header-height", val + "px")
+    }
+
+    const setNewCornerRoundness = (e: ChangeEvent<HTMLInputElement>) => {
+        const val = Number(e.target.value)
+        setCornerRoundness(val)
+        document.documentElement.style.setProperty("--content-border-radius", val + "px")
+    }
+
     return (<>
+
+        <h3>Adjust style</h3>
+        <div style={{width: "100%", height: "fit-content", display: "grid", gridTemplateColumns: "1fr 1fr"}}>
+            <div className="ui-style-options">
+                <label htmlFor="gap-checkbox">Windows gap</label>
+                <input id="gap-checkbox" type="checkbox" checked={gap} onChange={setNewGap}></input>
+            </div>
+            <div className="ui-style-options">
+                <label htmlFor="borders-checkbox">Borders</label>
+                <input id="borders-checkbox" type="checkbox" checked={borders} onChange={setNewBorders}></input>
+            </div>
+            <div className="ui-style-options">
+                <label htmlFor="header-size-input">Header height</label>
+                <input id="header-size-input" type="number" min={25} max={80} 
+                value={headerSize} onChange={setNewHeaderSize}></input>
+            </div>
+            <div className="ui-style-options">
+                <label htmlFor="corner-roundness-input">Corner roundness</label>
+                <input id="corner-roundness-input" type="number" min={0} max={200} 
+                value={cornerRoundness} onChange={setNewCornerRoundness}></input>
+            </div>
+        </div>
+        
+
         <h3>Select theme</h3>
         <h4>Background themes</h4>
         <div className="themes-container">
@@ -17,16 +75,16 @@ function ThemesTab() {
         <hr className="divider"></hr>
         <h4>Material themes</h4>
         <div className="themes-container">
-            <div className="theme-button" onClick={() => {applyTheme("soft_white")}} style={{backgroundColor: "#fff"}}>Soft light</div>
+            <div className="theme-button" onClick={() => {applyTheme("soft_white")}} style={{backgroundColor: "#fff", color: "#000", textShadow: "none"}}>Soft light</div>
             <div className="theme-button" onClick={() => {applyTheme("soft_black")}} style={{backgroundColor: "#000"}}>Soft dark</div>
         </div>
 
         <hr className="divider"></hr>
         <h4>Color themes</h4>
         <div className="themes-container">
-            <div className="theme-button" onClick={() => {applyTheme("breeze")}} style={{backgroundColor: themes.breeze["--main-theme-color"], color: themes.breeze["--font-color"], textShadow: "none"}}>Breeze</div>
-            <div className="theme-button" onClick={() => {applyTheme("lime")}} style={{backgroundColor: themes.lime["--main-theme-color"], color: themes.lime["--font-color"], textShadow: "none"}}>Lime</div>
-            <div className="theme-button" onClick={() => {applyTheme("cherry_varenyk")}} style={{backgroundColor: themes.cherry_varenyk["--main-theme-color"], color: themes.cherry_varenyk["--font-color"], textShadow: "none"}}>Cherry Varenyk</div>
+            <div className="theme-button" onClick={() => {applyTheme("breeze")}} style={{backgroundColor: themes.breeze.mainColor, color: themes.breeze.text, textShadow: "none"}}>Breeze</div>
+            <div className="theme-button" onClick={() => {applyTheme("lime")}} style={{backgroundColor: themes.lime.mainColor, color: themes.lime.text, textShadow: "none"}}>Lime</div>
+            <div className="theme-button" onClick={() => {applyTheme("cherry_varenyk")}} style={{backgroundColor: themes.cherry_varenyk.mainColor, color: themes.cherry_varenyk.text, textShadow: "none"}}>Cherry Varenyk</div>
         </div>
         
     </>)

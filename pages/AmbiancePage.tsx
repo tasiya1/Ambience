@@ -105,7 +105,7 @@ function AmbiancePage(){
     }
 
     const addNewWindow = (type: WindowType) => {
-        if (windows.some(w => w.type === "clock" && type === "clock")) {
+        if (windows.some(w => (w.type === "clock" && type === "clock") || (w.type === "chibbidibbey" && type === "chibbidibbey"))) {
             return
         }
 

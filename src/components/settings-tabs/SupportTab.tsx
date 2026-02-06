@@ -15,6 +15,10 @@ function SupportTab() {
         </form>
 
         <h3>What's new?</h3>
+        <h4 className="testing-notice">Feb 2, 2026</h4>
+        <p>Improved themes & individual icons for ChibbiDibbey.
+
+        </p>
         
     </>)
 }
